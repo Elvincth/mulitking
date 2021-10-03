@@ -1159,6 +1159,11 @@ array-includes@^3.1.1, array-includes@^3.1.3:
     get-intrinsic "^1.1.1"
     is-string "^1.0.5"
 
+array-shuffle@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/array-shuffle/-/array-shuffle-3.0.0.tgz#9a927cc2ca4c8ef4d71cddef7c9ee7b3b733d54b"
+  integrity sha512-rogEGxHOQPhslOhpg12LJkB+bbAl484/s2AJq0BxtzQDQfKl76fS2u9zWgg3p3b9ENcuvE7K8A7l5ddiPjCRnw==
+
 array-union@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"
@@ -4494,6 +4499,11 @@ to-regex-range@^5.0.1:
   integrity sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
   dependencies:
     is-number "^7.0.0"
+
+to-words@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/to-words/-/to-words-3.0.0.tgz#2cc1599863022344d833370a89799f3d60c0b4fc"
+  integrity sha512-NVuWjwLMcETCU5EnTrx81nCXBMUS+PGf2ACjcv1pTtGGvxfFctFFqoEjAwRmQ849PpE5jZLKw3Fhc8VV4LxWvQ==
 
 toggle-selection@^1.0.6:
   version "1.0.6"

@@ -8,8 +8,10 @@ const MyContainer = ({
   className?: string;
 }) => {
   return (
-    <div className={`min-h-screen font-sans ${className}`}>
-      <div className="mx-auto max-w-[428px] w-full">{children}</div>
+    <div className={`min-h-screen font-serif ${className}`}>
+      <div className="p-6 mx-auto max-w-[428px] min-h-screen relative">
+        {children}
+      </div>
     </div>
   );
 };

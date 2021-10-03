@@ -6,9 +6,12 @@ module.exports = {
     extend: {
       colors: {
         lightPink: "#FCF5F3",
+        brightPink: "#F13361",
       },
       fontFamily: {
-        sans: ["Rosarivo", "serif"],
+        serif: ["Rosarivo", "serif"],
+        boldSerif: ["PT Serif", "serif"],
+        cursive: ["Patrick Hand", "cursive"],
       },
     },
   },
