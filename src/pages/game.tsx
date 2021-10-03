@@ -16,6 +16,11 @@ import CrossIcon from "../components/CrossIcon";
 import anime from "animejs";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { isJSON } from "../utils/utils";
+
+export interface IWrongAns {
+  answers: Array<string>;
+}
 
 //multiplier * multiplicand = product
 const Formula = ({
@@ -127,6 +132,36 @@ const Game: NextPage = () => {
     setQuestions(questions); //Gen questions
   }, []);
 
+
+  //Store wrong ans to local storage
+  const storeWrongAns = async () => {
+    let newWrongAnswer: Array<string> = [];
+    const wrongAnswer = await localStorage.getItem("wrongAns");
+    const wrongAnsFormula = `${current.multiplicand} x ${current.multiplier} = ${current.answer}`;
+
+    //If have prev storage
+    if (isJSON(wrongAnswer || "")) {
+      //@ts-ignore
+      let wrongAnswerObj: IWrongAns = JSON.parse(wrongAnswer) as IWrongAns;
+
+      wrongAnswerObj.answers.forEach((item) => {
+        newWrongAnswer.push(item);
+      });
+    }
+
+    newWrongAnswer.push(wrongAnsFormula);
+
+    //Avoid duplicate store
+    newWrongAnswer = [...new Set(newWrongAnswer)];
+
+    localStorage.setItem(
+      "wrongAns",
+      JSON.stringify({ answers: newWrongAnswer })
+    );
+
+    console.log(localStorage.getItem("wrongAns"));
+  };
+
   //Check question
   const check = (answer: number) => {
     const correct = answer === current.answer;
@@ -142,7 +177,9 @@ const Game: NextPage = () => {
 
       nextQuestion();
     } else {
+      //Wrong answer
       setWrong(true);
+      storeWrongAns();
     }
   };
 
@@ -194,7 +231,7 @@ const Game: NextPage = () => {
     });
 
     if (result.isConfirmed) {
-      router.push("/");
+      router.push("/home");
     }
   };
 

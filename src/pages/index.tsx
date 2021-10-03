@@ -39,7 +39,7 @@ const Index = () => {
       </div>
 
       {!haveName && (
-        <Link href="name" passHref>
+        <Link href="/name" passHref>
           <Button
             colorScheme="orange"
             className="!bg-[#F19335] !shadow-none !rounded-full mt-5"

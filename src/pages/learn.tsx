@@ -4,7 +4,7 @@ import MyContainer from "../components/MyContainer";
 import Link from "next/link";
 import { levelColors } from "../utils/levelColors";
 import CrossIcon from "../components/CrossIcon";
-import { IconButton } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react";
 import { ToWords } from "to-words";
 
 const Learn: NextPage = () => {
@@ -26,7 +26,7 @@ const Learn: NextPage = () => {
   return (
     <MyContainer className="bg-lightPink font-boldSerif">
       <nav className="flex items-center">
-        <div className="ml-8 w-full text-center text-brightPink text-[35px] font-bold ">
+        <div className="ml-8 w-full text-center text-[#1966A9] text-[35px] font-bold ">
           Learn
         </div>
 
@@ -40,12 +40,24 @@ const Learn: NextPage = () => {
         </Link>
       </nav>
 
+      <div className="flex justify-center">
+        <Link href="/prev_wrong" passHref>
+          <Button
+            colorScheme="blue"
+            className="!bg-[#1966A9] !shadow-none !rounded-full my-7 capitalize !font-normal"
+            size="lg"
+          >
+            previously wrong
+          </Button>
+        </Link>
+      </div>
+
       {levelColors.map((levelColor, level) => {
         return (
           <div key={level}>
             <div
               className={`flex justify-center items-center ${
-                level === 0 ? "mt-5" : "mt-8"
+                level === 0 ? "" : "mt-8"
               }`}
             >
               <Castle
