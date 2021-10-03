@@ -1,19 +1,35 @@
+import { MouseEventHandler } from "react";
+
 const NumberDragonKid = ({
   number,
   className,
+  onClick,
+  cardColor,
 }: {
   number: number;
   className?: string;
+  onClick?: MouseEventHandler<SVGSVGElement>;
+  cardColor?: string;
 }) => {
+  let xCoord = 59.0678;
+  const textLen = number.toString().length;
+
+  if (textLen === 2) {
+    xCoord = 38.2364;
+  } else if (textLen === 3) {
+    xCoord = 19.9472;
+  }
+
   return (
     <svg
       width="100%"
-      height="195"
       viewBox="0 0 274 195"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`${className} hover:opacity-95 active:brightness-90 transition-all duration-150`}
       style={{ maxWidth: 235, userSelect: "none" }}
+      onClick={onClick}
+      role="button"
     >
       <path
         d="M230.596 145.881C230.596 145.881 235.62 138.461 238.459 140.338C241.298 142.217 241.865 147.567 241.865 147.567L230.596 145.881Z"
@@ -259,7 +275,13 @@ const NumberDragonKid = ({
         d="M136.433 39.0668C136.685 40.5846 138.119 41.6113 139.638 41.3604C141.155 41.1087 142.182 39.6734 141.931 38.1557C141.679 36.6371 140.244 35.6104 138.726 35.8621C137.208 36.1138 136.181 37.5491 136.433 39.0668Z"
         fill="#30161D"
       />
-      <rect y="50" width="153" height="97" rx="17" fill="#D2574E" />
+      <rect
+        y="50"
+        width="153"
+        height="97"
+        rx="17"
+        fill={cardColor ? cardColor : "#D2574E"}
+      />
       <text
         fill="white"
         xmlSpace="preserve"
@@ -268,10 +290,7 @@ const NumberDragonKid = ({
         fontSize="81.9746"
         letterSpacing="0.06em"
       >
-        <tspan
-          x={number.toString().length === 1 ? "59.0678" : "38.2364"}
-          y="128.421"
-        >
+        <tspan x={xCoord} y="128.421">
           {number}
         </tspan>
       </text>

@@ -1,19 +1,35 @@
+import { MouseEventHandler } from "react";
+
 const NumberKnightKid = ({
   number,
   className,
+  onClick,
+  cardColor,
 }: {
   number: number;
   className?: string;
+  onClick?: MouseEventHandler<SVGSVGElement>;
+  cardColor?: string;
 }) => {
+  let xCoord = 198.068;
+  const textLen = number.toString().length;
+
+  if (textLen === 2) {
+    xCoord = 177.236;
+  } else if (textLen === 3) {
+    xCoord = 159.447;
+  }
+
   return (
     <svg
       width="100%"
-      height="207"
       viewBox="0 0 293 207"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`${className} hover:opacity-95 active:brightness-90 transition-all duration-150`}
       style={{ maxWidth: 250, userSelect: "none" }}
+      onClick={onClick}
+      role="button"
     >
       <path
         d="M101.729 159.932C101.729 159.932 112.86 182.671 119.212 183.752C125.565 184.834 142.127 176.37 142.127 176.37C142.127 176.37 151.149 184.51 151.226 182.19C151.303 179.869 143.691 164.227 143.691 164.227C143.691 164.227 127.438 172.119 126.045 170.331C124.653 168.544 119.073 153.537 119.073 153.537L101.729 159.932Z"
@@ -76,7 +92,14 @@ const NumberKnightKid = ({
         d="M93.0814 159.1C75.2669 161.177 67.8748 157.33 68.0016 154.535L69.7228 118.659C69.814 111.159 75.9666 105.153 83.4665 105.243L94.1103 105.372C101.61 105.462 108.097 107.986 108.007 115.486L113.285 154.009C114.333 157.391 93.0814 159.1 93.0814 159.1Z"
         fill="#CAD3D5"
       />
-      <rect x="140" y="73" width="153" height="97" rx="17" fill="#4C545C" />
+      <rect
+        x="140"
+        y="73"
+        width="153"
+        height="97"
+        rx="17"
+        fill={cardColor ? cardColor : "#4C545C"}
+      />
       <text
         fill="white"
         xmlSpace="preserve"
@@ -85,10 +108,7 @@ const NumberKnightKid = ({
         fontSize="81.9746"
         letterSpacing="0.06em"
       >
-        <tspan
-          x={number.toString().length === 1 ? "198.068" : "177.236"}
-          y="149.421"
-        >
+        <tspan x={xCoord} y="149.421">
           {number}
         </tspan>
       </text>

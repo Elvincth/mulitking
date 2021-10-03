@@ -9,6 +9,7 @@ import { GetServerSideProps } from "next";
 import { useEffect, useState } from "react";
 import { ToWords } from "to-words";
 import { randomInteger } from "../utils/number";
+import confetti from "canvas-confetti";
 
 //multiplier * multiplicand = product
 const Formula = ({
@@ -57,13 +58,17 @@ interface IQuestion {
 }
 
 const Game: NextPage = () => {
+  const WRONG_COLOR = "#EC9C22";
   const toWords = new ToWords();
   const router = useRouter();
   const { level } = router.query;
   //Store questions
   const [questions, setQuestions] = useState<Array<IQuestion>>([]);
   const [levelName, setLevelName] = useState("");
-  const [currentQuestion, setCurrentQuestion] = useState(1);
+  const [currentQNum, setCurrentQNum] = useState(0);
+  //Question wrong?
+  const [wrong, setWrong] = useState(false);
+  const current = questions[currentQNum];
 
   //Generate questions
   /**
@@ -102,7 +107,6 @@ const Game: NextPage = () => {
     return myQuestions;
   };
 
-
   //On mount
   useEffect(() => {
     setLevelName(`Castle ${toWords.convert(Number(level))}`);
@@ -110,32 +114,81 @@ const Game: NextPage = () => {
     setQuestions(questions); //Gen questions
   }, []);
 
+  //Check question
+  const check = (answer: number) => {
+    const correct = answer === current.answer;
+
+    if (correct) {
+      confetti({
+        particleCount: 50,
+        spread: 70,
+        origin: { y: 0.6 },
+        shapes: ["circle"],
+        ticks: 80,
+      });
+
+      nextQuestion();
+    } else {
+      setWrong(true);
+    }
+  };
+
+  const nextQuestion = () => {
+    setWrong(false);
+    setCurrentQNum(currentQNum + 1);
+  };
+
   return (
     <MyContainer className="bg-lightPink">
       {questions.length > 0 && (
         <div>
           {/* Title */}
-          <div className="text-center font-boldSerif font-bold">
-            <div className="text-[25px]">{levelName}</div>
+          <nav>
+            <div className="text-center font-boldSerif font-bold">
+              <div className="text-[25px]">{levelName}</div>
 
-            <div className="text-[20px]">
-              {currentQuestion} of {questions.length}
+              <div className="text-[20px]">
+                {currentQNum + 1} of {questions.length}
+              </div>
             </div>
-          </div>
+          </nav>
 
           {/* Question  */}
           <Formula
-            multiplier={questions[currentQuestion].multiplier}
-            multiplicand={questions[currentQuestion].multiplicand}
+            multiplier={current.multiplier}
+            multiplicand={current.multiplicand}
           />
 
           <div className="flex flex-col">
             <NumberDragonKid
-              className="ml-auto"
-              number={questions[currentQuestion].choices[0]}
+              className={`ml-auto my-5 transition-opacity duration-200 ${
+                wrong && current.choices[0] !== current.answer
+                  ? "!opacity-50 pointer-events-none"
+                  : ""
+              }`}
+              number={current.choices[0]}
+              cardColor={
+                wrong && current.choices[0] === current.answer
+                  ? WRONG_COLOR
+                  : ""
+              }
+              onClick={() => check(current.choices[0])}
             />
 
-            <NumberKnightKid number={questions[currentQuestion].choices[1]} />
+            <NumberKnightKid
+              className={`transition-opacity duration-200 ${
+                wrong && current.choices[1] !== current.answer
+                  ? "!opacity-50 pointer-events-none"
+                  : ""
+              }`}
+              number={current.choices[1]}
+              cardColor={
+                wrong && current.choices[1] === current.answer
+                  ? WRONG_COLOR
+                  : ""
+              }
+              onClick={() => check(current.choices[1])}
+            />
           </div>
         </div>
       )}
