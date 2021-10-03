@@ -39,7 +39,7 @@ const PrevWrong: NextPage = () => {
     >
       <nav className="flex">
         <div className="ml-8 w-full text-center text-[#1966A9] text-[35px] font-bold ">
-          Previously Wrong
+          Previously <br/>  Wrong
         </div>
 
         <Link href="/home" passHref>
