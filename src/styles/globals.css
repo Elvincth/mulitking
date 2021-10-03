@@ -13,3 +13,23 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* .swal2-popup {
+  max-width: 380px !important;
+
+} */
+
+#swal2-title{
+  font-family: 'PT Serif' !important;
+}
+
+.swal2-confirm{
+  background-color: #f19335 !important;
+  box-shadow: none !important;
+}
+
+
+.swal2-icon.swal2-question {
+  border-color: #f19335 !important;
+  color: #f19335 !important;
+}

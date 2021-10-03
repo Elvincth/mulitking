@@ -9,7 +9,7 @@ const MyContainer = ({
 }) => {
   return (
     <div className={`min-h-screen font-serif ${className}`}>
-      <div className="p-6 mx-auto max-w-[428px] min-h-screen relative">
+      <div className="p-6 mx-auto max-w-[428px] min-h-screen relative overflow-hidden">
         {children}
       </div>
     </div>

@@ -945,6 +945,11 @@
     postcss-selector-parser "^6.0.4"
     quick-lru "^5.1.1"
 
+"@types/animejs@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/animejs/-/animejs-3.1.4.tgz#92f90d1c800b9041b64a7da9da0e68e690146b0e"
+  integrity sha512-WUjeFT2SXd6intfE6cg6eL1jk/JL88JqM2gC4WqO4iHLmbCvHUq6aoLK13lGpDWs4FtS2PHoYraJZ0dEx99Dyg==
+
 "@types/canvas-confetti@^1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@types/canvas-confetti/-/canvas-confetti-1.4.2.tgz#35c99fc904492fdcc6515c742509e04f3527211c"
@@ -1088,6 +1093,11 @@ ajv@^8.0.1:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
+
+animejs@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/animejs/-/animejs-3.2.1.tgz#de9fe2e792f44a777a7fdf6ae160e26604b0cdda"
+  integrity sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==
 
 anser@1.4.9:
   version "1.4.9"
@@ -4419,6 +4429,16 @@ supports-color@^8.0.0:
   dependencies:
     has-flag "^4.0.0"
 
+sweetalert2-react-content@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/sweetalert2-react-content/-/sweetalert2-react-content-4.1.1.tgz#89664f11bd39d804db61576e2c5161584b51b80b"
+  integrity sha512-64PMraASSMo/0CkNhNn6sjjrUqdS8L1IFgOT3rERIN2tJd66p7I78e8LdomwRjsuN5LIE4eqTSpPK9f8o4QNvg==
+
+sweetalert2@^11.1.7:
+  version "11.1.7"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.1.7.tgz#0ff2851eae77a76a3fe0ab289d3c32493e811b6d"
+  integrity sha512-7MHQVtKCTORfA9e58g9ZOfT3X58DkSBtvoCQJnqSHobXXb5C7aB8Yg/tAccTFnefCUBU41PoStjXMkzG3bNeig==
+
 table@^6.0.9:
   version "6.7.2"
   resolved "https://registry.yarnpkg.com/table/-/table-6.7.2.tgz#a8d39b9f5966693ca8b0feba270a78722cbaf3b0"
@@ -4650,6 +4670,11 @@ use-subscription@1.5.1:
   integrity sha512-Xv2a1P/yReAjAbhylMfFplFKj9GssgTwN7RlcTxBujFQcloStWNDQdc4g4NRWH9xS4i/FDk04vQBptAXoF3VcA==
   dependencies:
     object-assign "^4.1.1"
+
+usehooks-ts@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/usehooks-ts/-/usehooks-ts-1.0.3.tgz#1d24035af7023f186652ea075ed54928e7d6051f"
+  integrity sha512-wpJNLLXHjFsDze+IwdNHx6QqHOyfZIoXC4QpcJoK6fmxt/JzJumLxHnT0Vit1lzN9erAt4m1WtxCEbeTKqtiJA==
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"

@@ -1,48 +1,56 @@
-import type { NextPage } from "next";
-import Castle from "../components/Castle";
 import MyContainer from "../components/MyContainer";
+import { Button } from "@chakra-ui/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-const Home: NextPage = () => {
-  const colors: Array<{ color: string; shadeColor: string }> = [
-    { color: "#F13361", shadeColor: "#D22355" },
-    { color: "#4BA651", shadeColor: "#307D35" },
-    { color: "#7C3AED", shadeColor: "#5B21B6" },
-    { color: "#F59E0B", shadeColor: "#D97706" },
-    { color: "#2563EB", shadeColor: "#1E40AF" },
-    { color: "#EF4444", shadeColor: "#B91C1C" },
-    { color: "#404040", shadeColor: "#262626" },
-    { color: "#6366F1", shadeColor: "#4F46E5" },
-    { color: "#0EA5E9", shadeColor: "#0284C7" },
-    { color: "#FBBF24", shadeColor: "#F59E0B" },
-  ];
+const Index = () => {
+  const router = useRouter();
+  const [haveName, setHaveName] = useState(true);
+
+  useEffect(() => {
+    const myName = localStorage.getItem("name");
+
+    if (myName) {
+      router.push("/home");
+      setHaveName(true);
+    } else {
+      setHaveName(false);
+    }
+  }, [router]);
 
   return (
-    <MyContainer className="bg-lightPink mb-5">
-      <div className="mt-8 text-[27px]">Hello</div>
-      <div className="font-boldSerif font-bold text-[44px]">Elvin</div>
-      <h1 className="text-brightPink font-boldSerif text-[38px] font-bold capitalize mb-5">
-        start your <br /> journey...
-      </h1>
+    <MyContainer className="bg-lightPink">
+      <img
+        alt=""
+        className="absolute right-0 top-[100px]"
+        src="/img/bg_math_1.svg"
+      />
 
-      {colors.map((item, i) => (
-        <Link
-          key={i}
-          href={{ pathname: "/game", query: { level: i + 1 } }}
-          passHref
-        >
-          <div>
-            <Castle
-              className={i % 2 === 0 ? "" : "ml-auto"}
-              color={item.color}
-              shadeColor={item.shadeColor}
-              levelName={i + 1}
-            />
-          </div>
+      <img alt="" className="absolute bottom-0 left-0" src="/img/boy.svg" />
+
+      <div className="mt-[130px]">
+        <h1 className="text-[40px] leading-[63px]">
+          Welcome To <br /> MULTIKING
+        </h1>
+        <div className="text-[24px] mt-1 capitalize max-w-[242px]">
+          Be a multiplication king
+        </div>
+      </div>
+
+      {!haveName && (
+        <Link href="name" passHref>
+          <Button
+            colorScheme="orange"
+            className="!bg-[#F19335] !shadow-none !rounded-full mt-5"
+            size="lg"
+          >
+            Let’s Go
+          </Button>
         </Link>
-      ))}
+      )}
     </MyContainer>
   );
 };
 
-export default Home;
+export default Index;

@@ -10,6 +10,12 @@ import { useEffect, useState } from "react";
 import { ToWords } from "to-words";
 import { randomInteger } from "../utils/number";
 import confetti from "canvas-confetti";
+import { levelColors } from "../utils/levelColors";
+import { IconButton } from "@chakra-ui/react";
+import CrossIcon from "../components/CrossIcon";
+import anime from "animejs";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 //multiplier * multiplicand = product
 const Formula = ({
@@ -21,10 +27,10 @@ const Formula = ({
 }) => {
   return (
     <div className="mt-8 font-cursive tracking-[0.185em] text-right text-[103px]">
-      <div className="leading-[80px]">{multiplier}</div>
+      <div className="leading-[80px] multiplier">{multiplier}</div>
       <div className="flex justify-between">
         <span>X</span>
-        <span>{multiplicand}</span>
+        <span className="multiplicand">{multiplicand}</span>
       </div>
 
       <div className="bg-black h-[8px] rounded-full" />
@@ -58,17 +64,24 @@ interface IQuestion {
 }
 
 const Game: NextPage = () => {
-  const WRONG_COLOR = "#EC9C22";
-  const toWords = new ToWords();
   const router = useRouter();
   const { level } = router.query;
+
+  const WRONG_COLOR = "#EC9C22";
+  const LEVEL_COLOR = levelColors[Number(level) - 1].color;
+  const LEVEL_SHADE_COLOR = levelColors[Number(level) - 1].shadeColor;
+
+  const toWords = new ToWords();
+
   //Store questions
   const [questions, setQuestions] = useState<Array<IQuestion>>([]);
   const [levelName, setLevelName] = useState("");
   const [currentQNum, setCurrentQNum] = useState(0);
   //Question wrong?
   const [wrong, setWrong] = useState(false);
+  //Current question
   const current = questions[currentQNum];
+  const MySwal = withReactContent(Swal);
 
   //Generate questions
   /**
@@ -133,17 +146,72 @@ const Game: NextPage = () => {
     }
   };
 
-  const nextQuestion = () => {
+  const nextQuestion = async () => {
     setWrong(false);
-    setCurrentQNum(currentQNum + 1);
+
+    //Time line of kids change num
+    const kidsEl = anime.timeline({
+      easing: "easeOutExpo",
+      duration: 500,
+    });
+
+    // Add children
+    kidsEl
+      .add({
+        targets: ".dragonKid",
+        translateX: 280,
+      })
+      .add(
+        {
+          targets: ".knightKid",
+          translateX: -280,
+        },
+        -300
+      )
+      .add({
+        targets: ".dragonKid",
+        translateX: 0,
+      })
+      .add({
+        targets: ".knightKid",
+        translateX: 0,
+      });
+
+    if (questions.length - 1 > currentQNum) {
+      setCurrentQNum(currentQNum + 1);
+    } else {
+      //End of the game
+      router.push("/completed");
+    }
+  };
+
+  const exitGame = async () => {
+    const result = await MySwal.fire({
+      icon: "question",
+      width: 380,
+      title: <> Back To Home </>,
+      showCancelButton: true,
+    });
+
+    if (result.isConfirmed) {
+      router.push("/");
+    }
   };
 
   return (
-    <MyContainer className="bg-lightPink">
+    <MyContainer className="bg-lightPink ">
       {questions.length > 0 && (
         <div>
           {/* Title */}
-          <nav>
+          <nav className="flex justify-around items-center">
+            <Castle
+              className="w-[70px] "
+              levelName={Number(level)}
+              color={LEVEL_COLOR}
+              noClick
+              shadeColor={LEVEL_SHADE_COLOR}
+            />
+
             <div className="text-center font-boldSerif font-bold">
               <div className="text-[25px]">{levelName}</div>
 
@@ -151,6 +219,15 @@ const Game: NextPage = () => {
                 {currentQNum + 1} of {questions.length}
               </div>
             </div>
+
+            {/* Back to home */}
+            <IconButton
+              onClick={exitGame}
+              className="!shadow-none !bg-white active:brightness-95 !rounded-full"
+              aria-label="Back Home"
+              size="lg"
+              icon={<CrossIcon />}
+            />
           </nav>
 
           {/* Question  */}
@@ -161,7 +238,7 @@ const Game: NextPage = () => {
 
           <div className="flex flex-col">
             <NumberDragonKid
-              className={`ml-auto my-5 transition-opacity duration-200 ${
+              className={`dragonKid ml-auto my-5 transition-opacity duration-200 ${
                 wrong && current.choices[0] !== current.answer
                   ? "!opacity-50 pointer-events-none"
                   : ""
@@ -170,13 +247,13 @@ const Game: NextPage = () => {
               cardColor={
                 wrong && current.choices[0] === current.answer
                   ? WRONG_COLOR
-                  : ""
+                  : levelColors[Number(level) - 1].color
               }
               onClick={() => check(current.choices[0])}
             />
 
             <NumberKnightKid
-              className={`transition-opacity duration-200 ${
+              className={`knightKid transition-opacity duration-200 ${
                 wrong && current.choices[1] !== current.answer
                   ? "!opacity-50 pointer-events-none"
                   : ""

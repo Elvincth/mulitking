@@ -17,6 +17,8 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          {/*eslint-disable-next-line @next/next/no-title-in-document-head */}
+          <title>MULTIKING</title>
           <link
             href="https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&display=swap"
             rel="stylesheet"
