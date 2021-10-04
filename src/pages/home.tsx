@@ -31,11 +31,13 @@ const Home: NextPage = () => {
         start your <br /> journey...
       </h1>
 
-      <Link href="/learn" passHref>
-        <div className={`w-[220px] mx-auto`}>
-          <LearnCastle />
-        </div>
-      </Link>
+      <div className="flex items-center justify-center">
+        <Link href="/learn" passHref>
+          <div className={`w-[220px]`}>
+            <LearnCastle />
+          </div>
+        </Link>
+      </div>
 
       {levelColors.map((item, i) => (
         <Link

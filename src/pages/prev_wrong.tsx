@@ -39,7 +39,7 @@ const PrevWrong: NextPage = () => {
     >
       <nav className="flex">
         <div className="ml-8 w-full text-center text-[#1966A9] text-[35px] font-bold ">
-          Previously <br/>  Wrong
+          Previously <br /> Wrong
         </div>
 
         <Link href="/home" passHref>
@@ -52,15 +52,30 @@ const PrevWrong: NextPage = () => {
         </Link>
       </nav>
 
-      {wrongAns.map((col, i) => (
-        <div className="text-center font-bold text-[25px] my-2" key={i}>
-          {col}
-        </div>
-      ))}
+      <div className="min-h-[200px]">
+        {wrongAns.map((col, i) => (
+          <div className="text-center font-bold text-[25px] my-2" key={i}>
+            {col}
+          </div>
+        ))}
+      </div>
+
+      {wrongAns.length > 0 && (
+        <Link href="/test_again" passHref>
+          <Button
+            colorScheme="blue"
+            className="!bg-[#1966A9] mx-auto !shadow-none !rounded-full my-3 capitalize !font-normal"
+            size="lg"
+            width={200}
+          >
+            Test Again
+          </Button>
+        </Link>
+      )}
 
       <Button
         colorScheme="blue"
-        className="!bg-[#1966A9] mt-auto mx-auto !shadow-none !rounded-full my-7 capitalize !font-normal"
+        className="!bg-[#1966A9] mx-auto !shadow-none !rounded-full my-3 capitalize !font-normal"
         size="lg"
         width={200}
         onClick={clearAll}

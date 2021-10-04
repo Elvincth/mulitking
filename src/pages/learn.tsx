@@ -82,7 +82,6 @@ const Learn: NextPage = () => {
           </div>
         );
       })}
-      <div></div>
     </MyContainer>
   );
 };
