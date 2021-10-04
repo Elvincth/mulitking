@@ -73,15 +73,17 @@ const PrevWrong: NextPage = () => {
         </Link>
       )}
 
-      <Button
-        colorScheme="blue"
-        className="!bg-[#1966A9] mx-auto !shadow-none !rounded-full my-3 capitalize !font-normal"
-        size="lg"
-        width={200}
-        onClick={clearAll}
-      >
-        Clear All
-      </Button>
+      {wrongAns.length > 0 && (
+        <Button
+          colorScheme="blue"
+          className="!bg-[#1966A9] mx-auto !shadow-none !rounded-full my-3 capitalize !font-normal"
+          size="lg"
+          width={200}
+          onClick={clearAll}
+        >
+          Clear All
+        </Button>
+      )}
     </MyContainer>
   );
 };
