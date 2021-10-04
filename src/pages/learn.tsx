@@ -62,7 +62,7 @@ const Learn: NextPage = () => {
             >
               <Castle
                 className="w-[70px]"
-                levelName={Number(level)}
+                levelName={Number(level + 1)}
                 color={levelColor.color}
                 noClick
                 shadeColor={levelColor.shadeColor}
